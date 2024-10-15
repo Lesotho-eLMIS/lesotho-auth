@@ -30,7 +30,7 @@ public class PasswordResetRequestDtoValidator extends BaseValidator {
   private static final String PASS_FIELD = "newPassword";
   private static final String REGEX_CONTAINS_NUMBER = "(?=.*[0-9]).+";
   private static final String REGEX_CONTAINS_SPACES = "(?=\\S+$).+";
-  private static final String REGEX_SIZE_IS_BETWEEN_8_AND_72 = "^[a-zA-Z0-9]{8,72}$";
+  private static final String REGEX_SIZE_IS_BETWEEN_8_AND_72 = "^[a-zA-Z0-9@#$%^&+=!*_-]{8,72}$";
 
   @Autowired
   private UserReferenceDataService userReferenceDataService;
