@@ -15,38 +15,15 @@
 
 package org.openlmis.auth.dto;
 
-import java.util.UUID;
+import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.openlmis.auth.domain.User;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
-public final class UserDto implements User.Importer, User.Exporter {
-  private UUID id;
-  private String username;
-  private String password;
-  private Boolean enabled;
-  private boolean lockedOut;
-
-  /**
-   * Creates UserDto object with given params.
-   *
-   * @param id user id
-   * @param username username
-   * @param enabled is user enabled
-   */
-  public UserDto(UUID id, String username, Boolean enabled) {
-    this.id = id;
-    this.username = username;
-    this.enabled = enabled;
-  }
+@Getter
+public class SaveBatchResultDto<T> {
+  private List<T> successfulResults;
+  private List<T> failedResults;
 }

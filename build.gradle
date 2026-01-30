@@ -41,7 +41,7 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4"
     compile "org.projectlombok:lombok"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    compile "org.postgresql:postgresql:42.0.0"
+    compile "org.postgresql:postgresql:42.6.2"
     compile "org.springframework.boot:spring-boot-starter-integration"
     compile "org.springframework.integration:spring-integration-jdbc"
     compile "org.springframework:spring-test"
@@ -160,6 +160,7 @@ task generateMigration {
 }
 
 jacocoTestReport {
+    dependsOn integrationTest, test
     group = "reporting"
     description = "Generate Jacoco coverage reports after running tests."
     reports {
@@ -168,7 +169,8 @@ jacocoTestReport {
         csv.enabled false
     }
 
-    additionalSourceDirs(files(sourceSets.main.allJava.srcDirs))
+    executionData file("$buildDir/jacoco/test.exec"), file("$buildDir/jacoco/integrationTest.exec")
+    additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
 }
 
 checkstyle {
