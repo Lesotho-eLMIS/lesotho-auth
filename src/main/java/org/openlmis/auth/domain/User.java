@@ -30,6 +30,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -51,6 +52,9 @@ public class User extends BaseEntity implements UserDetails {
   @Column
   private boolean lockedOut;
 
+  @Column
+  private ZonedDateTime lastLoginDate;
+
   /**
    * Creates new instance of {@link User} based on passed data.
    */
@@ -69,6 +73,8 @@ public class User extends BaseEntity implements UserDetails {
     username = importer.getUsername();
     enabled = importer.getEnabled();
     lockedOut = importer.isLockedOut();
+
+    lastLoginDate = importer.getLastLoginDate();
 
     String newPassword = importer.getPassword();
     if (StringUtils.hasText(newPassword)) {
@@ -110,6 +116,7 @@ public class User extends BaseEntity implements UserDetails {
     exporter.setPassword(password);
     exporter.setEnabled(enabled);
     exporter.setLockedOut(lockedOut);
+    exporter.setLastLoginDate(lastLoginDate);
 
   }
 
@@ -124,6 +131,8 @@ public class User extends BaseEntity implements UserDetails {
     Boolean getEnabled();
 
     boolean isLockedOut();
+
+    ZonedDateTime getLastLoginDate();
   }
 
   public interface Exporter {
@@ -137,6 +146,8 @@ public class User extends BaseEntity implements UserDetails {
     void setEnabled(Boolean enabled);
 
     void setLockedOut(boolean lockedOut);
+
+    void setLastLoginDate(ZonedDateTime lastLoginDate);
   }
 
 }

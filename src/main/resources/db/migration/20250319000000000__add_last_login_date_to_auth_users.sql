@@ -1,0 +1,1 @@
+ALTER TABLE auth_users ADD COLUMN last_login_date TIMESTAMP WITH TIME ZONE;
