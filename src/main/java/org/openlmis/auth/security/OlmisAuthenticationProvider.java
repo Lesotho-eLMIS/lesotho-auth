@@ -66,6 +66,9 @@ public class OlmisAuthenticationProvider extends DaoAuthenticationProvider {
 
     try {
       super.additionalAuthenticationChecks(userDetails, authentication);
+      // Capture login timestamp on successful authentication
+      user.setLastLoginDate(ZonedDateTime.now());
+      userRepository.save(user);
     } catch (Exception ex) {
       counter.incrementCounter();
 

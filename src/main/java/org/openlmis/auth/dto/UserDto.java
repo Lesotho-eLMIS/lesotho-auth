@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.openlmis.auth.domain.User;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -36,6 +37,7 @@ public final class UserDto implements User.Importer, User.Exporter {
   private String password;
   private Boolean enabled;
   private boolean lockedOut;
+  private ZonedDateTime lastLoginDate;
 
   /**
    * Creates UserDto object with given params.
